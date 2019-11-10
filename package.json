@@ -21,12 +21,12 @@
     "wkhtmltopdf": "^0.3.4"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"nodemon server.js\"",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "nodemon server.js",
-    "heroku-postbuild": "npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "npm install && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
