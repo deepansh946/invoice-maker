@@ -1,0 +1,162 @@
+<html>
+  <head>
+    <style>
+      body {
+        padding: 0.2cm;
+        zoom: 0.55;
+      }
+
+      .flex {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+      }
+
+      table {
+        border-collapse: collapse important;
+        width: 100%;
+        margin-top: 1cm;
+        font-size: 20px;
+      }
+
+      td {
+        font-size: 18px;
+      }
+
+      td,
+      th {
+        text-align: left;
+        padding: 8px;
+      }
+
+      .table-head {
+        background-color: #095390 !important;
+        color: white;
+      }
+
+      tr:nth-child(odd):not(:first-child) {
+        background-color: #dddddd !important;
+      }
+
+      .billing-details {
+        -webkit-box-align: end;
+        -ms-flex-align: end;
+        align-items: flex-end;
+        margin-top: 1cm;
+        font-size: 20px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+
+      .billing-details > div {
+        margin-bottom: 10px;
+      }
+
+      .sub-title {
+        font-weight: 600;
+        letter-spacing: 5px;
+        margin-left: 7cm;
+        margin-top: 0.5cm;
+        font-size: 40px;
+      }
+
+      .blue {
+        color: #60b2f5;
+      }
+
+      .large-text {
+        font-size: 30px;
+      }
+
+      .small-text {
+        font-size: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="flex">
+      <div class="flex">
+        <img
+          src="https://res.cloudinary.com/dlep4pzrt/image/upload/v1573214153/logo_gpst58.png"
+          alt="logo"
+        />
+      </div>
+      <p class="blue sub-title">
+        INVOICE
+      </p>
+    </header>
+
+    <main class="details">
+      <div class="flex" style="margin-top: 1.5cm">
+        <div>
+          <p class="blue large-text" style="margin-top: 40px">
+            <strong>
+              {{ name }}
+            </strong>
+          </p>
+          <p class="blue small-text" style="margin-top: -20px">
+            {{ email }}
+          </p>
+          <p class="blue small-text" style="margin-top: -20px">
+            {{ phone }}
+          </p>
+        </div>
+        <div style="padding-right: 0.5cm">
+          <p class="blue large-text" align="right">
+            <strong>
+              Details
+            </strong>
+          </p>
+          {{#if invoiceNumber}}
+          <p class="blue small-text" style="margin-top: -20px" align="right">
+            # {{ invoiceNumber }}
+          </p>
+          {{/if}}
+          <p class="blue small-text" style="margin-top: -20px" align="right">
+            Date: {{ date }}
+          </p>
+        </div>
+      </div>
+      <table>
+        <tr class="table-head">
+          <th style="width: 60%">Item</th>
+          <th>Quantity</th>
+          <th>Rate</th>
+          <th>Amount</th>
+        </tr>
+        {{#data}}
+        <tr>
+          <td style="width: 60%">{{ name }}</td>
+          <td>{{ unit }}</td>
+          <td>Rs. {{ cost }}</td>
+          <td>Rs. {{ amount }}</td>
+        </tr>
+        {{/data}}
+      </table>
+
+      <div class="billing-details">
+        <div>
+          <span>Subtotal:</span>
+          <span>Rs. {{ subTotal }}</span>
+        </div>
+        <div>
+          <span>CGST+IGST (12%):</span>
+          <span>Rs. {{ tax }}</span>
+        </div>
+        <div>
+          <span>Total:</span>
+          <span>Rs. {{ total }} </span>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
