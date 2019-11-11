@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 const pdf = require('dynamic-html-pdf');
 require('dotenv').config();
 
@@ -53,17 +54,30 @@ const generateInvoice = async (req, res) => {
     cloudinary.config({
       cloud_name: 'dlep4pzrt',
       api_key: 849526945395139,
-      api_secret: 'Q6yDdXOWTnGjLarZRzTtgOeLmmgT',
+      api_secret: 'Q6yDdXOWTnGjLarZRzTtgOeLmmg',
     });
 
     const uniqueFileName = new Date().toISOString();
+    const timestamp = Date.now();
+    const hashString = `public_id=bills/${uniqueFileName}&tags=bills&timestamp=${timestamp}&Q6yDdXOWTnGjLarZRzTtgOeLmmg`;
 
     const {filename} = result;
 
+    const shasum = crypto.createHash('sha1');
+    shasum.update(hashString);
+    const signature = shasum.digest('hex');
+
+    console.log(signature);
+
     const image = await cloudinary.uploader.upload(filename, {
+      // api_key: 849526945395139,
+      // timestamp,
       public_id: `bills/${uniqueFileName}`,
       tags: 'bills',
+      // signature,
     });
+
+    console.log(image);
 
     res.send({...image});
   } catch (error) {
