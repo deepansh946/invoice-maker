@@ -67,7 +67,7 @@ const generateInvoice = async (req, res) => {
 
     res.send({...image});
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 
