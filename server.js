@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const app = express();
 
+app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
 // CORS Middleware
@@ -72,7 +73,7 @@ const generateInvoice = async (req, res) => {
 
 app.post('/get-invoice', generateInvoice);
 
-app.get('*', function(req, res) {
+app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
