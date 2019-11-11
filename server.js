@@ -52,8 +52,8 @@ const generateInvoice = async (req, res) => {
     const cloudinary = require('cloudinary').v2;
     cloudinary.config({
       cloud_name: 'dlep4pzrt',
-      api_key: process.env.API_KEY,
-      api_secret: process.env.API_SECRET,
+      api_key: 849526945395139,
+      api_secret: 'Q6yDdXOWTnGjLarZRzTtgOeLmmgT',
     });
 
     const uniqueFileName = new Date().toISOString();
